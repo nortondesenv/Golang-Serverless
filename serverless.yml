@@ -1,0 +1,41 @@
+service: myservice
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: go1.x
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: us-east-1
+
+package:
+  patterns:
+    - "!./**"
+    - ./bin/**
+
+functions:
+  getUser:
+    handler: bin/main
+    events:
+      - httpApi:
+          path: /user
+          method: get
+  createUser:
+    handler: bin/main
+    events:
+      - httpApi:
+          path: /user
+          method: post
+  updateUser:
+    handler: bin/main
+    events:
+      - httpApi:
+          path: /user
+          method: put
+  deleteUser:
+    handler: bin/main
+    events:
+      - httpApi:
+          path: /user
+          method: delete
